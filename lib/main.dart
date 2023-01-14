@@ -1,5 +1,4 @@
 import 'package:amazon_clone/Constants/global_variables.dart';
-import 'package:amazon_clone/Features/Home/screens/home_screen.dart';
 import 'package:amazon_clone/Features/admin/screens/admin_screen.dart';
 import 'package:amazon_clone/Features/auth/Screens/auth_screen.dart';
 import 'package:amazon_clone/Providers/user_provider.dart';
@@ -40,6 +39,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Amazon Clone",
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: GlobalVariables.backgroundColor,
         colorScheme: const ColorScheme.light(
@@ -51,6 +51,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
+      // home: const AdminScreen(),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
           ? Provider.of<UserProvider>(context).user.type == "user"
               ? Builder(
@@ -60,7 +61,7 @@ class _MyAppState extends State<MyApp> {
                 )
               : Builder(
                   builder: (context) {
-                    return const AdminScreen();
+                    return AdminScreen();
                   },
                 )
           : Builder(

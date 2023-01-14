@@ -46,7 +46,6 @@ class AuthService {
                 "Account has been created!! Login with your Credentails");
           });
     } catch (e) {
-      print("${e.toString()} error while signing up");
       showSnackBar(context, "Unexpected error occured ${e.toString()}");
     }
   }
@@ -116,7 +115,7 @@ class AuthService {
         userProvider.setUser(userRes.body);
       }
     } catch (e) {
-      showSnackBar(context, e.toString());
+      // showSnackBar(context, e.toString());
     }
   }
 }

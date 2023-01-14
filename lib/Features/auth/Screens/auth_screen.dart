@@ -3,8 +3,6 @@ import 'package:amazon_clone/Features/auth/Services/auth_service.dart';
 import 'package:amazon_clone/common/Widgets/custom_button.dart';
 import 'package:amazon_clone/common/Widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 enum Auth {
   signIn,
