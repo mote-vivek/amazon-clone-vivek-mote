@@ -1,5 +1,10 @@
+import 'dart:io';
+
+import 'package:amazon_clone/Constants/utils.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
@@ -31,6 +36,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   }
 
   String category = "Mobiles";
+  List<File> images = [];
 
   List<String> productCategories = [
     'Mobiles',
@@ -39,6 +45,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
     'Books',
     'Fashion',
   ];
+
+  void selectImages() async {
+    var res = await pickImages();
+    setState(() {
+      images = res;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,37 +83,56 @@ class _AddProductScreenState extends State<AddProductScreen> {
               const SizedBox(
                 height: 20,
               ),
-              DottedBorder(
-                borderType: BorderType.RRect,
-                radius: const Radius.circular(10),
-                dashPattern: const [10, 4],
-                strokeCap: StrokeCap.round,
-                child: Container(
-                  width: double.infinity,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.folder_open,
-                        size: 40,
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        "select product images",
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.grey.shade400,
+              GestureDetector(
+                onTap: selectImages,
+                child: images.isNotEmpty
+                    ? CarouselSlider(
+                        items: images.map((e) {
+                          return Builder(builder: (context) {
+                            return Image.file(
+                              e,
+                              fit: BoxFit.cover,
+                              height: 200,
+                            );
+                          });
+                        }).toList(),
+                        options: CarouselOptions(
+                          height: 200,
+                          viewportFraction: 1,
+                        ),
+                      )
+                    : DottedBorder(
+                        borderType: BorderType.RRect,
+                        radius: const Radius.circular(10),
+                        dashPattern: const [10, 4],
+                        strokeCap: StrokeCap.round,
+                        child: Container(
+                          width: double.infinity,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.folder_open,
+                                size: 40,
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              Text(
+                                "select product images",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.grey.shade400,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
               ),
               const SizedBox(height: 30),
               CustomTextField(
