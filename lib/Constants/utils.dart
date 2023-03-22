@@ -4,7 +4,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 void showSnackBar(BuildContext context, String text) {
-  print(text);
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(text),
@@ -12,7 +11,7 @@ void showSnackBar(BuildContext context, String text) {
   );
 }
 
-Future<List<File>> pickImages() async {
+Future<List<File>> pickImages(BuildContext context) async {
   List<File> images = [];
   try {
     var files = await FilePicker.platform.pickFiles(
@@ -26,7 +25,7 @@ Future<List<File>> pickImages() async {
       }
     }
   } catch (e) {
-    print("e");
+    showSnackBar(context, e.toString());
   }
   return images;
 }

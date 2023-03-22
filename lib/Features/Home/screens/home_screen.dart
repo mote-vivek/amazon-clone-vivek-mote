@@ -2,11 +2,10 @@ import 'package:amazon_clone/Features/Home/widgets/address_box.dart';
 import 'package:amazon_clone/Features/Home/widgets/carousal_images.dart';
 import 'package:amazon_clone/Features/Home/widgets/deal_of_the_day.dart';
 import 'package:amazon_clone/Features/Home/widgets/top_categories.dart';
-import 'package:amazon_clone/Providers/user_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../../Constants/global_variables.dart';
+import '../../Search/Screens/search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = "/home-screen";
@@ -17,9 +16,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  void navigateToSearchScreen(String query) {
+    Navigator.of(context).pushNamed(
+      SearchScreen.routeName,
+      arguments: query,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserProvider>(context, listen: false).user;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -42,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     borderRadius: BorderRadius.circular(7),
                     elevation: 1,
                     child: TextFormField(
-                      // onFieldSubmitted: navigateToSearchScreen,
+                      onFieldSubmitted: navigateToSearchScreen,
                       decoration: InputDecoration(
                         prefixIcon: InkWell(
                           onTap: () {},
@@ -110,11 +115,11 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 10,
             ),
-            // CarouselImage(),
+            CarouselImage(),
             SizedBox(
               height: 10,
             ),
-            // DealOfTheDay(),
+            DealOfTheDay(),
           ],
         ),
       ),

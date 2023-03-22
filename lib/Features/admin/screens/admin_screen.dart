@@ -1,14 +1,14 @@
 import 'package:amazon_clone/Features/admin/screens/posts_screen.dart';
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../../../Constants/global_variables.dart';
-import '../../../models/user.dart';
-import 'package:http/http.dart' as http;
+
+import 'analytics_screen.dart';
+import 'orders_screen.dart';
 
 class AdminScreen extends StatefulWidget {
+  const AdminScreen({super.key});
+
   @override
   State<AdminScreen> createState() => _AdminScreenState();
 }
@@ -20,12 +20,8 @@ class _AdminScreenState extends State<AdminScreen> {
 
   List<Widget> pages = [
     const PostsScreen(),
-    const Center(
-      child: Text("Analytics"),
-    ),
-    const Center(
-      child: Text("Cart"),
-    ),
+    const AnalyticsScreen(),
+    const OrdersScreen(),
   ];
 
   void updatePage(int page) {

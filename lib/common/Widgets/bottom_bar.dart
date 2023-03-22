@@ -1,8 +1,8 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../Constants/global_variables.dart';
 import '../../Features/account/screens/account_screen.dart';
-import '../../Features/Home/screens/cart_screen.dart';
+import '../../Features/Cart/Screens/cart_screen.dart';
 import '../../Features/Home/screens/home_screen.dart';
 import '../../Providers/user_provider.dart';
 
@@ -21,7 +21,7 @@ class _BottomBarState extends State<BottomBar> {
 
   List<Widget> pages = [
     const HomeScreen(),
-    AccountScreen(),
+    const AccountScreen(),
     const CartScreen(),
   ];
 
@@ -33,7 +33,7 @@ class _BottomBarState extends State<BottomBar> {
 
   @override
   Widget build(BuildContext context) {
-    // final userCartLen = context.watch<UserProvider>().user.cart.length;
+    final userCartLen = context.watch<UserProvider>().user.cart.length;
 
     return Scaffold(
       body: pages[_page],
@@ -99,13 +99,35 @@ class _BottomBarState extends State<BottomBar> {
                   ),
                 ),
               ),
-              child: Badge(
-                elevation: 0,
-                // badgeContent: Text(userCartLen.toString()),
-                badgeColor: Colors.white,
-                child: const Icon(
-                  Icons.shopping_cart_outlined,
-                ),
+              child: Stack(
+                children: [
+                  const Icon(
+                    Icons.shopping_cart_outlined,
+                  ),
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: Container(
+                      padding: const EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      constraints: const BoxConstraints(
+                        minWidth: 16,
+                        minHeight: 16,
+                      ),
+                      child: Text(
+                        userCartLen.toString(),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             label: '',

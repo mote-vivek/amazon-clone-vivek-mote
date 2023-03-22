@@ -2,9 +2,12 @@ console.log("Hello Vivek");
 //Imports from packages
 const express = require("express");
 const mongoose = require("mongoose");
+const adminRouter = require("./routes/admin");
+const productRouter = require("./routes/product")
 
 //Imports from other files
-const authRouter = require("./routes/auth")
+const authRouter = require("./routes/auth");
+const userRouter = require("./routes/user");
 
 const PORT = 3000;
 const app = express();
@@ -14,6 +17,9 @@ const DB = "mongodb+srv://vivek_mote:vivek%401234@cluster0.2tss4mx.mongodb.net/?
 //middleware
 app.use(express.json());
 app.use(authRouter);
+app.use(adminRouter);
+app.use(productRouter);
+app.use(userRouter);
 
 //Connections
 mongoose.connect(DB).then(() => {

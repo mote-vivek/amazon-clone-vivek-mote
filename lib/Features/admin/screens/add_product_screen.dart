@@ -4,13 +4,11 @@ import 'package:amazon_clone/Constants/utils.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../../../Constants/global_variables.dart';
 import '../../../common/Widgets/custom_button.dart';
 import '../../../common/Widgets/custom_textfield.dart';
+import '../services/admin_services.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({Key? key}) : super(key: key);
@@ -25,6 +23,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController quantityController = TextEditingController();
+  final AdminServices adminSerives = AdminServices();
 
   @override
   void dispose() {
@@ -37,6 +36,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   String category = "Mobiles";
   List<File> images = [];
+  final _addProductFormKey = GlobalKey<FormState>();
 
   List<String> productCategories = [
     'Mobiles',
@@ -46,11 +46,25 @@ class _AddProductScreenState extends State<AddProductScreen> {
     'Fashion',
   ];
 
-  void selectImages() async {
-    var res = await pickImages();
+  void selectImages(BuildContext context) async {
+    var res = await pickImages(context);
     setState(() {
       images = res;
     });
+  }
+
+  void sellProduct() {
+    if (_addProductFormKey.currentState!.validate() && images.isNotEmpty) {
+      adminSerives.sellProduct(
+        context: context,
+        name: productNameController.text,
+        description: descriptionController.text,
+        price: double.parse(priceController.text),
+        quantity: double.parse(quantityController.text),
+        category: category,
+        images: images,
+      );
+    }
   }
 
   @override
@@ -74,6 +88,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       ),
       body: SingleChildScrollView(
           child: Form(
+        key: _addProductFormKey,
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 10,
@@ -84,7 +99,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 height: 20,
               ),
               GestureDetector(
-                onTap: selectImages,
+                onTap: () => pickImages(context),
                 child: images.isNotEmpty
                     ? CarouselSlider(
                         items: images.map((e) {
@@ -179,7 +194,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
               const SizedBox(height: 10),
               CustomButton(
                 text: 'Sell',
-                onTap: () {},
+                onTap: sellProduct,
               ),
             ],
           ),
