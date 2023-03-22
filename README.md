@@ -1,7 +1,7 @@
-#Amazon Clone
+# Amazon Clone
 Full Stack Amazon Clone along with Admin Panel
 
-#Features
+# Features
 Email & Password Authentication
 Persisting Auth State
 Searching Products
