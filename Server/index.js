@@ -9,7 +9,7 @@ const productRouter = require("./routes/product")
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const app = express();
 const DB = "mongodb+srv://vivek_mote:vivek%401234@cluster0.2tss4mx.mongodb.net/?retryWrites=true&w=majority";
 

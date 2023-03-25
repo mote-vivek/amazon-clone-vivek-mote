@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-String uri = "http://192.168.150.65:3000";
+// String uri = "http://192.168.150.65:3000";
+String uri = "https://amazon-clone-vivek-mote.onrender.com";
 
 class GlobalVariables {
   static const appBarGradient = LinearGradient(

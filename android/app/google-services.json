@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "753223803986",
+    "project_id": "clone-vivek-mote",
+    "storage_bucket": "clone-vivek-mote.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:753223803986:android:d68d3198c04a118581ab8b",
+        "android_client_info": {
+          "package_name": "com.example.amazon_clone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "753223803986-4264a0ilmhsr61v8vpva8mpd7pg8gtvb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.amazon_clone",
+            "certificate_hash": "d4de90b15c1b297076d271f88bbcd694fe8f4d55"
+          }
+        },
+        {
+          "client_id": "753223803986-1tj8hr3kmnofkg92u3hs5bq7ioturkha.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnVacdIdiFQ5oDmlyxYKxAI0EKtTAwEhc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "753223803986-1tj8hr3kmnofkg92u3hs5bq7ioturkha.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
