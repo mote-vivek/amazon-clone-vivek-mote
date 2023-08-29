@@ -1,6 +1,6 @@
 import 'package:amazon_clone/common/Widgets/custom_button.dart';
 import 'package:flutter/material.dart';
-import 'package:pay/pay.dart';
+// import 'package:pay/pay.dart';
 import 'package:provider/provider.dart';
 
 import '../../../Constants/global_variables.dart';
@@ -29,19 +29,19 @@ class _AddressScreenState extends State<AddressScreen> {
   final _addressFormKey = GlobalKey<FormState>();
 
   String addressToBeUsed = "";
-  List<PaymentItem> paymentItems = [];
+  // List<PaymentItem> paymentItems = [];
   final AddressServices addressServices = AddressServices();
 
   @override
   void initState() {
     super.initState();
-    paymentItems.add(
-      PaymentItem(
-        amount: widget.totalAmount,
-        label: 'Total Amount',
-        status: PaymentItemStatus.final_price,
-      ),
-    );
+    // paymentItems.add(
+      // PaymentItem(
+      //   amount: widget.totalAmount,
+      //   label: 'Total Amount',
+      //   status: PaymentItemStatus.final_price,
+      // ),
+    // );
   }
 
   @override
@@ -170,18 +170,18 @@ class _AddressScreenState extends State<AddressScreen> {
                 ),
               ),
               const SizedBox(height: 10),
-              GooglePayButton(
-                onPressed: () => payPressed(address),
-                // paymentConfigurationAsset: 'gpay.json',
-                onPaymentResult: onGooglePayResult,
-                paymentItems: paymentItems,
-                height: 50,
-                type: GooglePayButtonType.order,
-                margin: const EdgeInsets.only(top: 15),
-                loadingIndicator: const Center(
-                  child: CircularProgressIndicator(),
-                ),
-              ),
+              // GooglePayButton(
+              //   onPressed: () => payPressed(address),
+              //   // paymentConfigurationAsset: 'gpay.json',
+              //   onPaymentResult: onGooglePayResult,
+              //   paymentItems: paymentItems,
+              //   height: 50,
+              //   type: GooglePayButtonType.order,
+              //   margin: const EdgeInsets.only(top: 15),
+              //   loadingIndicator: const Center(
+              //     child: CircularProgressIndicator(),
+              //   ),
+              // ),
               CustomButton(
                   text: "Pay for Try",
                   onTap: () {

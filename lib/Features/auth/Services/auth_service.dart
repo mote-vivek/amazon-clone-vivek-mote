@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:amazon_clone/Constants/error_handling.dart';
 import 'package:amazon_clone/Constants/global_variables.dart';
 import 'package:amazon_clone/Constants/utils.dart';
+import 'package:amazon_clone/Features/admin/screens/admin_screen.dart';
 import 'package:amazon_clone/Providers/user_provider.dart';
 import 'package:amazon_clone/common/Widgets/bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -76,11 +78,18 @@ class AuthService {
           Provider.of<UserProvider>(context, listen: false).setUser(res.body);
           await pref.setString("x-auth-token", jsonDecode(res.body)["token"]);
           // ignore: use_build_context_synchronously
-          Navigator.pushNamedAndRemoveUntil(
+          if(Provider.of<UserProvider>(context,listen: false).user.type == "user"){
+            Navigator.pushNamedAndRemoveUntil(
             context,
             BottomBar.routeName,
             (route) => false,
           );
+          }
+          else{
+            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_){
+              return AdminScreen();
+            }), (route) => false);
+          }
         },
       );
     } catch (e) {

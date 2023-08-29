@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../Constants/global_variables.dart';
 
+import '../../account/Services/account_services.dart';
 import 'analytics_screen.dart';
 import 'orders_screen.dart';
 
@@ -14,6 +15,7 @@ class AdminScreen extends StatefulWidget {
 }
 
 class _AdminScreenState extends State<AdminScreen> {
+  AccountServices accountServices = AccountServices();
   int _page = 0;
   double bottomBarWidth = 42;
   double bottomBarBorderWidth = 5;
@@ -33,6 +35,14 @@ class _AdminScreenState extends State<AdminScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          accountServices.logOut(context);
+        },
+        tooltip: "Add a Product",
+        child: const Icon(Icons.logout),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
@@ -46,12 +56,7 @@ class _AdminScreenState extends State<AdminScreen> {
             children: [
               Container(
                 alignment: Alignment.topLeft,
-                child: Image.asset(
-                  "assets/images/amazon_in.png",
-                  height: 45,
-                  width: 120,
-                  color: Colors.black,
-                ),
+                child: const Text("E-Bazaar"),
               ),
               const Text(
                 "Admin",
